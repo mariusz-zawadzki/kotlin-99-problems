@@ -1,4 +1,4 @@
-package pl.monku
+package pl.monku.kata
 
 /**
  * Created by mariusz.r.zawadzki@gmail.com on 09.08.17.
@@ -9,20 +9,20 @@ package pl.monku
  * Created by mariusz.r.zawadzki@gmail.com on 09.08.17.
  */
 fun chopRecursion(needle: Int, hayStack: List<Int>): Int {
-    return chopRecursionInner(needle, hayStack , 0)
+    return chopRecursionInner(needle, hayStack, 0)
 }
 fun chopRecursionInner(needle: Int, hayStack: List<Int>, offset: Int): Int {
 
-    if(hayStack.size == 0){
-        return -1;
+    if(hayStack.isEmpty()){
+        return -1
     }
-    var index = hayStack.size/2;
-    var upperBound = hayStack.size;
-    var lowerBound = 0;
-    val mid = hayStack[index];
+    val index = hayStack.size/2
+    var upperBound = hayStack.size
+    var lowerBound = 0
+    val mid = hayStack[index]
     if(mid == needle)
     {
-        return offset+index;
+        return offset+index
     }
     if(needle< mid)
     {

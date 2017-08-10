@@ -1,4 +1,4 @@
-package pl.monku
+package pl.monku.kata
 
 import org.hamcrest.core.Is
 import org.junit.Assert
@@ -7,12 +7,15 @@ import org.junit.Test
 /**
  * Created by mariusz.r.zawadzki@gmail.com on 09.08.17.
  */
+
 class Kata1Tests {
 
-    val testedFunction = ::chop;
 
-    val hayStack = listOf(1, 2, 3, 4, 5, 7, 8, 9, 123);
-    val hayStackEven = listOf(1, 2, 3, 4, 5, 7, 8, 9);
+
+    val testedFunction = ::chop
+
+    val hayStack = listOf(1, 2, 3, 4, 5, 7, 8, 9, 123)
+    val hayStackEven = listOf(1, 2, 3, 4, 5, 7, 8, 9)
 
     @Test fun `should find first element`() {
         Assert.assertThat(testedFunction(1, hayStack), Is.`is`(0))
