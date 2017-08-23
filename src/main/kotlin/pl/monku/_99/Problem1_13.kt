@@ -52,7 +52,7 @@ fun flatten(list: List<Any>): List<Any> {
 //P08
 fun <T> compress(list: List<T>): List<T> {
     return list.filterIndexed { index, t ->
-        (index > 0 && list[index-1] != t)
+        (index == 0 || list[index-1] != t)
     }
 }
 
@@ -96,7 +96,7 @@ fun <T> encodeModified(list: List<T>): List<Any> {
 fun <T> decode(list: List<Pair<Int,T>>): List<T>{
     return list.flatMap { p-> 1.rangeTo(p.first).map { p.second } }
 }
-//P09
+//P13
 fun <T> encodeDirect(list: List<T>): List<Pair<Int,T>> {
     var previous: T? = null
     var currentList: Pair<Int,T>? =  null

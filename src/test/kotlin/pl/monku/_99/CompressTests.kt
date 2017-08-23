@@ -18,4 +18,9 @@ class CompressTests{
     fun `should encode list of characters`() {
          Assert.assertThat(compress("aaaabccaadeeee".toList()), Is.`is`(listOf<Char>('a','b','c', 'a', 'd', 'e')))
     }
+
+    @Test
+    fun `should encode list of characters with single start`() {
+         Assert.assertThat(compress("abccaadeeee".toList()), Is.`is`(listOf<Char>('a','b','c', 'a', 'd', 'e')))
+    }
 }
