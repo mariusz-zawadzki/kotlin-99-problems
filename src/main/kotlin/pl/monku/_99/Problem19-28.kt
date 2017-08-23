@@ -114,11 +114,6 @@ fun <E> group(groups: List<Int>, list: List<E>): List<List<List<E>>> {
         }
         result.toList()
     }
-//    groupedCombinations.forEach({ c->println(c)})
-//    return combinations.map { l->
-//        var mutable = list.toMutableList()
-//        l.map { e->mutable.removeAt(0)}
-//    }
 }
 
 fun groupCombinations(combination : List<List<List<Int>>>): List<List<List<Int>>>{
@@ -143,19 +138,6 @@ fun groupCombinations1(prefixes: List<List<List<Int>>>, combination: List<List<I
         }
     }
 }
-//
-//fun <E> extractGroups(groups: List<List<Int>>, list: List<E>): List<List<E>>
-//{
-//    while(groups.size>0)
-//}
-//
-//fun <E> extractGroup(group: List<Int>, list: List<E>): Pair<List<E>, List<E>>{
-//    val reminder = list.toMutableList()
-//    val select = mutableListOf<E>()
-//    group.forEach { e->select.add(reminder.removeAt(e)) }
-//    return Pair(select, reminder)
-//}
-
 
 
 //P28
