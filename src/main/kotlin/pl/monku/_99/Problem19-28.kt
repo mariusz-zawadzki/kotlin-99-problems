@@ -6,9 +6,9 @@ import java.util.*
 
 //P19
 fun <T> rotate(n: Int, list: List<T>): List<T>{
-    var rotate = n;
+    var rotate = n
     if(rotate==0) {
-        return list;
+        return list
     }
 
     rotate %= list.size
@@ -18,7 +18,7 @@ fun <T> rotate(n: Int, list: List<T>): List<T>{
     val result = arrayListOf<T>()
     result.addAll(list.subList(rotate,list.size))
     result.addAll(list.subList(0,rotate))
-    return result.toList();
+    return result.toList()
 }
 
 //P20
@@ -31,16 +31,13 @@ fun <T> removeAt(n: Int, list: List<T>): Pair<List<T>,T>{
 //P21
 fun <T> insertAt(c: T, n: Int, list: List<T>): List<T>{
     val toMutableList = list.toMutableList()
-    val t = toMutableList.removeAt(n)
+    toMutableList.removeAt(n)
     toMutableList.add(n,c)
     return toMutableList.toList()
 }
 
 //P22
-fun range(start: Int, end: Int): List<Int>
-{
-    return start.rangeTo(end).toList()
-}
+fun range(start: Int, end: Int): List<Int> = start.rangeTo(end).toList()
 
 val r = SecureRandom()
 //P23
@@ -96,7 +93,7 @@ fun <E> group(groups: List<Int>, list: List<E>): List<List<List<E>>> {
     check(list.size == groupSize, {"grouping size ($groupSize)should match list size (${list.size})"} )
     val combinations = mutableListOf<List<List<Int>>>()
 
-    var size = list.size;
+    var size = list.size
     groups.forEach { e->
         combinations.add(Combinations(e, size).allCombinations)
         size -=e
@@ -106,7 +103,8 @@ fun <E> group(groups: List<Int>, list: List<E>): List<List<List<E>>> {
         val result = mutableListOf<List<E>>()
         val reminder = list.toMutableList()
         parentCombinations.forEach { combination->
-            var combinationResult = mutableListOf<E>()
+            val combinationResult = mutableListOf<E>()
+            //sortDescending to avoid index out of bound
             combination.sortedDescending().forEach({index->
                 combinationResult.add(reminder.removeAt(index))
             })
@@ -126,7 +124,7 @@ fun groupCombinations(combination : List<List<List<Int>>>): List<List<List<Int>>
 
 fun groupCombinations1(prefixes: List<List<List<Int>>>, combination: List<List<Int>>): List<List<List<Int>>> {
     return if(prefixes.isEmpty()) {
-        combination.map { l-> listOf(l) };
+        combination.map { l-> listOf(l) }
     } else {
         prefixes.flatMap { prefix->
             val map = combination.map {c ->
@@ -141,10 +139,7 @@ fun groupCombinations1(prefixes: List<List<List<Int>>>, combination: List<List<I
 
 
 //P28
-fun <E> lengthSort(list: List<List<E>>): List<List<E>>
-{
-    return list.sortedBy { l->l.size }
-}
+fun <E> lengthSort(list: List<List<E>>): List<List<E>> = list.sortedBy { l->l.size }
 
 fun <E> lengthFreqSort(list: List<List<E>>): List<List<E>>
 {
