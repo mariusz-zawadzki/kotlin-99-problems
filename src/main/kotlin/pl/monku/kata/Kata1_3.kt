@@ -11,26 +11,18 @@ fun chopRecursionIterative(needle: Int, hayStack: List<Int>): Int {
     while(searchStack.isNotEmpty())
     {
         val index = searchStack.size/2
-        var upperBound = searchStack.size
-        var lowerBound = 0
         val mid = searchStack[index]
         if(mid == needle)
         {
             return offset+index
         }
-        if(needle< mid)
-        {
-            upperBound = index
-        }
-        else
-        {
-            lowerBound = index
-        }
-        if(lowerBound == 0 && upperBound == searchStack.size)
+        if(searchStack.size ==1)
         {
             return -1
         }
-        searchStack  = searchStack.subList(lowerBound, upperBound)
+        val lowerBound = if(needle < mid) 0 else index
+        val upperBound = if(needle < mid) index else searchStack.size
+        searchStack  = hayStack.subList(lowerBound+offset, upperBound+offset)
         offset += lowerBound
     }
     return -1
