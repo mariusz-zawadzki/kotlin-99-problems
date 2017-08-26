@@ -75,4 +75,32 @@ class Kata1Tests {
             Assert.assertThat(it(9, hayStackEven), Is.`is`(7))
         }
     }
+
+    @Test
+    fun `code kata original test data`() {
+
+        testedFunction.forEach {
+            Assert.assertEquals(-1, it(3, listOf()))
+            Assert.assertEquals(-1, it(3, listOf(1)))
+            Assert.assertEquals(0, it(1, listOf(1)))
+
+            Assert.assertEquals(0, it(1, listOf(1, 3, 5)))
+            Assert.assertEquals(1, it(3, listOf(1, 3, 5)))
+            Assert.assertEquals(2, it(5, listOf(1, 3, 5)))
+            Assert.assertEquals(-1, it(0, listOf(1, 3, 5)))
+            Assert.assertEquals(-1, it(2, listOf(1, 3, 5)))
+            Assert.assertEquals(-1, it(4, listOf(1, 3, 5)))
+            Assert.assertEquals(-1, it(6, listOf(1, 3, 5)))
+
+            Assert.assertEquals(0, it(1, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(1, it(3, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(2, it(5, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(3, it(7, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(-1, it(0, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(-1, it(2, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(-1, it(4, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(-1, it(6, listOf(1, 3, 5, 7)))
+            Assert.assertEquals(-1, it(8, listOf(1, 3, 5, 7)))
+        }
+    }
 }
