@@ -27,7 +27,7 @@ fun chop(needle: Int, hayStack: List<Int>): Int {
 //approach 2
 fun chopRecursion(needle: Int, hayStack: List<Int>): Int = chopRecursionInner(needle, hayStack, 0)
 
-fun chopRecursionInner(needle: Int, hayStack: List<Int>, offset: Int): Int {
+private fun chopRecursionInner(needle: Int, hayStack: List<Int>, offset: Int): Int {
 
     if (hayStack.isEmpty()) {
         return -1
@@ -71,3 +71,7 @@ fun chopRecursionIterative(needle: Int, hayStack: List<Int>): Int {
     }
     return -1
 }
+
+//approach 4
+
+//approach 5
