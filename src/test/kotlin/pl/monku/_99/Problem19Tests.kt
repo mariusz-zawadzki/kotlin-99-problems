@@ -4,7 +4,7 @@ import org.hamcrest.core.Is
 import org.junit.Assert
 import org.junit.Test
 
-class Problem19Tests{
+class Problem19Tests {
 
     private val testedList = "abcde".toList()
 
@@ -18,8 +18,8 @@ class Problem19Tests{
     fun `should rotate 1 and size+1 to the same list`() {
         val expectedResult = "bcdea".toList()
         Assert.assertThat(rotate(1, testedList), Is.`is`(expectedResult))
-        Assert.assertThat(rotate(testedList.size+1, testedList), Is.`is`(expectedResult))
-        Assert.assertThat(rotate(-testedList.size+1, testedList), Is.`is`(expectedResult))
+        Assert.assertThat(rotate(testedList.size + 1, testedList), Is.`is`(expectedResult))
+        Assert.assertThat(rotate(-testedList.size + 1, testedList), Is.`is`(expectedResult))
     }
 
     @Test

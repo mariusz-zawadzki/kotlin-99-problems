@@ -7,7 +7,7 @@ import org.junit.Test
 /**
  * Created by mariusz.r.zawadzki@gmail.com on 11.08.17.
  */
-class FlattenTests{
+class FlattenTests {
 
     @Test
     fun `should flatten properly`() {

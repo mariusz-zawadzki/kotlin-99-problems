@@ -5,7 +5,7 @@ import org.junit.Assert
 import org.junit.Test
 
 
-class Problem27Tests{
+class Problem27Tests {
 
 
     @Test
@@ -21,7 +21,7 @@ class Problem27Tests{
     @Test
     fun `should group small example`() {
         val list = listOf("Aldo", "Beat", "Carla")
-        val groups = listOf(1,1,1)
+        val groups = listOf(1, 1, 1)
         val message = group(groups, list)
 
         val size = calculateExpectedSize(groups, list)
@@ -34,7 +34,7 @@ class Problem27Tests{
         val B = "Beat"
         val C = "Carla"
         val list = listOf(A, B, C)
-        val groups = listOf(1,2)
+        val groups = listOf(1, 2)
         val message = group(groups, list)
 
         val size = calculateExpectedSize(groups, list)
@@ -42,10 +42,10 @@ class Problem27Tests{
 
         Assert.assertThat(message, Is.`is`(
                 listOf(
-                        listOf(listOf(A), listOf(C,B)),
-                        listOf(listOf(B), listOf(C,A)),
-                        listOf(listOf(C), listOf(B,A))
-        )
+                        listOf(listOf(A), listOf(C, B)),
+                        listOf(listOf(B), listOf(C, A)),
+                        listOf(listOf(C), listOf(B, A))
+                )
         ))
     }
 
@@ -64,6 +64,7 @@ class Problem27Tests{
         groups.forEach { i -> size /= factorial(i) }
         return size
     }
-    private fun factorial(list: Int) = 1.rangeTo(list).reduce { a, b -> a*b }
+
+    private fun factorial(list: Int) = 1.rangeTo(list).reduce { a, b -> a * b }
 
 }
