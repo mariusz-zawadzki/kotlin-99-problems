@@ -3,14 +3,7 @@ package pl.monku.kata
 /**
  * Created by mariusz.r.zawadzki@gmail.com on 09.08.17.
  */
-
-
-/**
- * Created by mariusz.r.zawadzki@gmail.com on 09.08.17.
- */
-fun chopRecursion(needle: Int, hayStack: List<Int>): Int {
-    return chopRecursionInner(needle, hayStack, 0)
-}
+fun chopRecursion(needle: Int, hayStack: List<Int>): Int = chopRecursionInner(needle, hayStack, 0)
 fun chopRecursionInner(needle: Int, hayStack: List<Int>, offset: Int): Int {
 
     if(hayStack.isEmpty()){
@@ -37,5 +30,5 @@ fun chopRecursionInner(needle: Int, hayStack: List<Int>, offset: Int): Int {
         return -1
     }
     val chopRecursion = chopRecursionInner(needle, hayStack.subList(lowerBound, upperBound), lowerBound)
-    return if(chopRecursion<0) -1 else offset+chopRecursion
+    return if(chopRecursion < 0) -1 else offset+chopRecursion
 }
