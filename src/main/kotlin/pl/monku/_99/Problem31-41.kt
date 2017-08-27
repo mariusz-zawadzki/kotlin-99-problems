@@ -86,6 +86,33 @@ fun Int.phi(): Int {
 //P39
 fun listPrimesInRange(range: IntRange) = range.filter { it.isPrime() }
 
+//P40
+fun Int.goldbach(): Pair<Int,Int>{
+    val goldbachLimited = this.goldbachLimited()
+    return if(goldbachLimited !=null) goldbachLimited else TODO("Goldbach conjecture not found for $this. Get noble price in math ;-) ")
+}
+
+//P41
+fun printGoldbachList(range: IntRange, limit: Int = Int.MIN_VALUE): List<Pair<Int,Int>> = range
+        .filter { it % 2 == 0 }
+        .mapNotNull {
+            it.goldbachLimited(limit)
+        }
+
+fun printGoldbachListLimited(range: IntRange, limit: Int = 1) =
+        printGoldbachList(range).filter { it.first>limit }
+
+fun Int.goldbachLimited(limit:Int = Int.MIN_VALUE): Pair<Int,Int>?{
+    if (this % 2 != 0) throw IllegalArgumentException("Number for goldbach should be even $this is odd")
+    val half = this / 2
+    val start = Math.max(limit, 2)
+    for(i in start..half) {
+        if(i.isPrime() && (this-i).isPrime())
+            return Pair(i, this-i)
+    }
+    return null
+}
+
 fun Int.pow(n: Int): Int {
     if (n == 0) {
         return 1
