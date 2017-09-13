@@ -118,8 +118,16 @@ fun Int.pow(n: Int): Int {
         return 1
     }
     var result = 1
-    for (i in 1..n) {
-        result *= this
+    var exp = n
+    var base = this
+    while(exp>0)
+    {
+        if(exp and 1 == 1)
+        {
+            result *=base
+        }
+        exp = exp shr 1
+        base *= base
     }
     return result
 }
