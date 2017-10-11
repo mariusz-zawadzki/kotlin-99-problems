@@ -1,6 +1,6 @@
 package pl.monku._99
 
-fun <T> Tree<T>.isSymetric(): Boolean{
+fun <T> Tree<T>.isSymmetric(): Boolean{
     if(this is Node){
         return areMirror(this.left, this.right)
     }
