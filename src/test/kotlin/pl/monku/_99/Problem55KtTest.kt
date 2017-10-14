@@ -5,9 +5,11 @@ import org.hamcrest.CoreMatchers.hasItems
 import org.junit.Assert.*
 import org.junit.Test
 
+fun x(l : Tree<String> =  End, r : Tree<String> = End): Tree<String> = Node("x", l,r)
+
 class P55Test {
 
-    fun x(l : Tree<String> =  End, r : Tree<String> = End): Tree<String> = Node("x", l,r)
+
     @Test
     fun `construct all balanced trees`() {
         assertThat(balancedTrees(0, "x").size, equalTo(1))
