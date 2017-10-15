@@ -8,7 +8,7 @@ fun <T> balancedHeightTrees(height: Int, element: T): List<Tree<T>> {
     } else if (height == 1) {
         return listOf(Node(element))
     } else {
-        return subHeightBalanced(height, element).filter { it.height()==height }
+        return subHeightBalanced(height, element)
     }
 }
 
@@ -28,11 +28,17 @@ fun <T> subHeightBalanced(height: Int, element: T): List<Tree<T>> {
     } else {
         val balancedLeft = subHeightBalanced(height - 1, element)
         val balancedRight = subHeightBalanced(height - 1, element)
-        return balancedLeft.flatMap { left ->
+        val distinct = balancedLeft.flatMap { left ->
             balancedRight.flatMap { right ->
-                listOf(Node(element, left, right), Node(element, right, left))
+                if(left == End && right == End){
+                    listOf()
+                }
+                else{
+                    listOf(Node(element, left, right), Node(element, right, left))
+                }
             }
         }.distinct()
+        return distinct
     }
 }
 
