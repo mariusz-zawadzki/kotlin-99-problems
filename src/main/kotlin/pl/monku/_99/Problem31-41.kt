@@ -114,19 +114,20 @@ fun Int.goldbachLimited(limit:Int = Int.MIN_VALUE): Pair<Int,Int>?{
 }
 
 fun Int.pow(n: Int): Int {
+    val ONE = 1
     if (n == 0) {
-        return 1
+        return ONE
     }
-    var result = 1
+    var result = ONE
     var exp = n
     var base = this
     while(exp>0)
     {
-        if(exp and 1 == 1)
+        if((exp and ONE) == ONE)
         {
-            result *=base
+            result *= base
         }
-        exp = exp shr 1
+        exp = exp shr ONE
         base *= base
     }
     return result

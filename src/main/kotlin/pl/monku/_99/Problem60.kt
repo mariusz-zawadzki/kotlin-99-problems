@@ -1,13 +1,6 @@
 package pl.monku._99
 
-fun minNodeAmountInHBTree(height: Int): Int{
-    return if(height<3)
-        height
-    else
-    {
-        2.pow(height-1)
-    }
-}
+fun minNodeAmountInHBTree(height: Int): Int = 2.pow(height-1)
 
 fun maxHeightOfHBTree(nodeAmount : Int ): Int {
     var height = 0
@@ -17,10 +10,7 @@ fun maxHeightOfHBTree(nodeAmount : Int ): Int {
     return height-1
 }
 
-fun <T> allHBTreesWithNodeAmount(nodes: Int, element:T): List<Tree<T>>{
-    val maxHeightOfHBTree = maxHeightOfHBTree(nodes)
-    return balancedHeightTrees(maxHeightOfHBTree, element).filter { it.nodesCount() == nodes }
-}
+fun <T> allHBTreesWithNodeAmount(nodes: Int, element:T): List<Tree<T>> = balancedHeightTrees(maxHeightOfHBTree(nodes), element).filter { it.nodesCount() == nodes }
 
 
 fun main(args: Array<String>){

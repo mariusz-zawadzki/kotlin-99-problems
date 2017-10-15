@@ -1,14 +1,10 @@
 package pl.monku._99
 
-fun grayCode(bits: Int) : List<String> {
-    if(bits == 1)
-    {
-        return listOf("0","1")
-    }
-    else
-    {
+fun grayCode(bits: Int) : List<String> = when (bits) {
+    1 -> listOf("0","1")
+    else -> {
         val less = grayCode(bits-1)
-        return listOf(less.map { "0$it" }, less.reversed().map { "1$it" }).flatMap { it }
+        listOf(less.map { "0$it" }, less.reversed().map { "1$it" }).flatMap { it }
     }
 }
 
