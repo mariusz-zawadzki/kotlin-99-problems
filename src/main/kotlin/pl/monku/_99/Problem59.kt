@@ -5,7 +5,7 @@ package pl.monku._99
 fun <T> balancedHeightTrees(height: Int, element: T): List<Tree<T>> = when (height) {
     0 -> listOf(End)
     1 -> listOf(Node(element))
-    else -> subHeightBalanced(height, element)
+    else -> subHeightBalanced(height, element).filter { it.height() == height }
 }
 
 fun <T> Tree<T>.height(): Int = when {
@@ -19,15 +19,12 @@ fun <T> subHeightBalanced(height: Int, element: T): List<Tree<T>> {
         1 -> return listOf(Node(element), End)
         else -> {
             val balancedLeft = subHeightBalanced(height - 1, element)
-            return balancedLeft.flatMap { left ->
+            val distinct = balancedLeft.flatMap { left ->
                 balancedLeft.flatMap { right ->
-                    if (left == End && right == End) {
-                        listOf()
-                    } else {
-                        listOf(Node(element, left, right), Node(element, right, left))
-                    }
+                    listOf(Node(element, left, right), Node(element, right, left))
                 }
             }.distinct()
+            return distinct
         }
     }
 }
