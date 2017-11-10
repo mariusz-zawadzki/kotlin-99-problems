@@ -3,18 +3,18 @@ package pl.monku._99
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
-import kotlin.coroutines.experimental.buildSequence
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
-    val nodes = 127+129
-    val time = measureTimeMillis {
-        balancedTrees(nodes, "X").size.toString().print()
-    }
+    val nodes = 40
     val timeCooroutines = measureTimeMillis {
         runBlocking {
             balancedTreesCooroutines(nodes, "X").size.toString().print()
         }
+    }
+
+    val time = measureTimeMillis {
+        balancedTrees(nodes, "X").size.toString().print()
     }
 
     println("normal      took $time ms")
@@ -31,7 +31,7 @@ fun <T> balancedTrees(nodes: Int, element: T): List<Tree<T>> {
         val n = (nodes - 1) / 2
         val balancedLeft = balancedTrees(n, element)
         val balancedRight = balancedTrees(nodes - 1 - n, element)
-        val mapped = HashSet<Pair<Tree<T>,Tree<T>>>()
+        val mapped = HashSet<Pair<Tree<T>, Tree<T>>>()
         val flatMap = balancedLeft.flatMap { left ->
             balancedRight.flatMap { right ->
                 flatMapTree(mapped, left, right, element)
@@ -58,17 +58,22 @@ suspend fun <T> balancedTreesCooroutines(nodes: Int, element: T): List<Tree<T>> 
         val balancedLeft = asyncBalancedLeft.await()
         val balancedRight = asyncBalancedRight.await()
 
-        val mapped = HashSet<Pair<Tree<T>,Tree<T>>>()
-        val mappedSequence = buildSequence {
-            balancedLeft.forEach { left ->
-                balancedRight.forEach { right ->
-                    yieldAll(flatMapTree(mapped, left, right, element))
+        val mapped = HashSet<Pair<Tree<T>, Tree<T>>>()
+        val mappedSequence =
+                balancedLeft.flatMap { left ->
+                    balancedRight.map { right ->
+                        async {
+                            flatMapTree(mapped, left, right, element)
+                        }
+                    }
                 }
-            }
-        }
         var toList = listOf<Tree<T>>()
         val time = measureTimeMillis {
-            toList = mappedSequence.toList()
+            toList = mappedSequence.map {
+                it.await()
+            }.flatMap {
+                it
+            }
         }
         "balancedRight size: ${balancedRight.size}".print()
         "balancedLeft  size: ${balancedLeft.size}".print()
@@ -79,7 +84,7 @@ suspend fun <T> balancedTreesCooroutines(nodes: Int, element: T): List<Tree<T>> 
 
 private fun <T> flatMapTree(mapped: HashSet<Pair<Tree<T>, Tree<T>>>, left: Tree<T>, right: Tree<T>, element: T): List<Node<T>> {
     val didHaveLeftRight = mapped.add(Pair(left, right))
-    val didHaveRightLeft=  mapped.add(Pair(right, left))
+    val didHaveRightLeft = mapped.add(Pair(right, left))
     val didNotHaveThisPair = didHaveLeftRight || didHaveRightLeft
     return if (didNotHaveThisPair) {
         if (left == right) {
